@@ -56,7 +56,7 @@ int main()
 
     SOCKET server = socket(AF_INET, SOCK_STREAM, 0);
     if (server == INVALID_SOCKET) {
-        printf("\nSOCKET CREATION FAILED! ERROR: %d\n", WSAGetLastError());
+        fprintf(stderr, "\nSOCKET CREATION FAILED! ERROR: %d\n", WSAGetLastError());
         WSACleanup();
         exit(2);
     }
@@ -69,14 +69,14 @@ int main()
     // Ask the OS to bind the service
     result = bind(server, (struct sockaddr*)&server_addr, sizeof(struct sockaddr_in));
     if(result == -1) {
-        printf("\nSERVICE BINDING FAILED! ERROR: %d\n", WSAGetLastError());
+        fprintf(stderr, "\nSERVICE BINDING FAILED! ERROR: %d\n", WSAGetLastError());
         WSACleanup();
         exit(3);
     }   
     
     // Start listening and reserver a queue for five clients that wants to connect
     if(listen(server, 5) == SOCKET_ERROR) {
-        printf("\nLISTENING INITIALIZATION FAILED! ERROR: %d\n", WSAGetLastError());
+        fprintf(stderr, "\nLISTENING INITIALIZATION FAILED! ERROR: %d\n", WSAGetLastError());
         WSACleanup();
         exit(4);
     }
@@ -98,7 +98,7 @@ int main()
             client_sock[0] = accept(server, (struct sockaddr*)&client_addr, &client_len);
             // Check if there was any error
             if(client_sock[0] == SOCKET_ERROR)
-                printf("\nCONNECTION FAILED! ERROR: %d\n", WSAGetLastError());
+                fprintf(stderr, "\nCONNECTION FAILED! ERROR: %d\n", WSAGetLastError());
         } // Repeat until a connection is established successfully
         while(client_sock[0] == SOCKET_ERROR);
         printf("\nPLAYER JOINED: %s:%d", inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
@@ -113,7 +113,7 @@ int main()
             client_sock[1] = accept(server, (struct sockaddr*)&client_addr, &client_len);
             // Check if there was any error
             if(client_sock[1] == SOCKET_ERROR)
-                printf("\nCONNECTION FAILED! ERROR: %d\n", WSAGetLastError());
+                fprintf(stderr, "\nCONNECTION FAILED! ERROR: %d\n", WSAGetLastError());
         } // Repeat until a connection is established successfully
         while(client_sock[1] == SOCKET_ERROR);
         printf("\nPLAYER JOINED: %s:%d", inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));

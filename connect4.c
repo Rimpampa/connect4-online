@@ -36,11 +36,7 @@ int main() {
     addr.sin_addr.s_addr = inet_addr(ip);
 
     // Connect to the server
-    result = connect(
-        sock,
-        (struct sockaddr*)&addr,
-        sizeof(struct sockaddr_in)
-    );
+    result = connect(sock, (struct sockaddr*)&addr, sizeof(struct sockaddr_in));
     if(result == SOCKET_ERROR) {
         printf("SOCKET CONNECTION FAILED, ERROR: %d\n", WSAGetLastError());
         WSACleanup();
