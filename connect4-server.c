@@ -10,7 +10,7 @@
 
  1] Decide randomly who, of the two players, is the one to play for first
     
-    .1] Send to the first player the FIRST flag and to the second the SECOND flag
+    - Send to the first player the FIRST flag and to the second the SECOND flag
 
  2] Wait for the player to send a number(one byte long) which indicates the column where he wants
     to insert his disc
